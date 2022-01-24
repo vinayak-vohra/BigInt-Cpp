@@ -101,12 +101,17 @@ BigInt::BigInt(string s)
         int char_to_int = c; // convert to int
         char_to_int -= 48;   // get actual value
 
-        if (char_to_int < 0 || char_to_int > 9)
-            throw invalid_argument("Invalid input.");
-
         // Throw error if Out of Memory
         try
         {
+            if (char_to_int < 0 || char_to_int > 9)
+            {
+                string msg = "Invalid integer: '";
+                msg += c;
+                msg.append("' in input.");
+                throw invalid_argument(msg);
+            }
+
             Node *node = new Node(char_to_int); // create Node
             if (!count)
             {
@@ -119,9 +124,13 @@ BigInt::BigInt(string s)
                 tail = node;       // update tail
             }
         }
+        catch (invalid_argument i)
+        {
+            cout << "\nError: " << i.what();
+        }
         catch (bad_alloc b)
         {
-            cout << "Error: Out of memory";
+            cout << "\nError: Out of memory";
         }
         count++;
     }

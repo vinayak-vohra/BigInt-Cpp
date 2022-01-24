@@ -11,6 +11,7 @@
 
 #ifndef Node_hpp
 #define Node_hpp
+#include <iostream>
 #include <stdexcept> // to throw invalid_argument
 using namespace std;
 
@@ -48,11 +49,18 @@ Node::Node()
  */
 Node::Node(int digit)
 {
-    if (digit > 9)
-        throw invalid_argument("Value should be less than 10.");
+    try
+    {
+        if (digit > 9)
+            throw invalid_argument("Expected value < 10, but received " + to_string(digit));
 
-    this->digit = digit;
-    this->next = nullptr;
+        this->digit = digit;
+        this->next = nullptr;
+    }
+    catch (invalid_argument i)
+    {
+        cout << "\nError: " << i.what();
+    }
 }
 
 /**
@@ -64,11 +72,18 @@ Node::Node(int digit)
  */
 Node::Node(int digit, Node *next)
 {
-    if (digit > 9)
-        throw invalid_argument("Value should be less than 10.");
+    try
+    {
+        if (digit > 9)
+            throw invalid_argument("Expected value < 10, but received " + to_string(digit));
 
-    this->digit = digit;
-    this->next = next;
+        this->digit = digit;
+        this->next = next;
+    }
+    catch (invalid_argument i)
+    {
+        cout << "\nError: " << i.what();
+    }
 }
 
 #endif // Node_hpp

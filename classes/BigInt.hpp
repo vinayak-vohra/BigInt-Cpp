@@ -13,9 +13,6 @@
 #define BigInt_hpp
 
 #include "Node.hpp" // Node definition
-#include <iostream> // for ostream
-
-using namespace std;
 
 /**
  * @brief BigInt stores big numbers as linkedlist
